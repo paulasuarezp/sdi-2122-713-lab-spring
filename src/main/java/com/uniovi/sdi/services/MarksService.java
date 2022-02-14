@@ -5,9 +5,7 @@ import com.uniovi.sdi.repositories.MarksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -16,15 +14,6 @@ public class MarksService {
     @Autowired
     private MarksRepository marksRepository;
 
-    /*
-    private List<Mark> marksList = new LinkedList<>();
-
-    @PostConstruct
-    public void init() {
-        marksList.add(new Mark(1L, "Ejercicio 1", 10.0));
-        marksList.add(new Mark(2L, "Ejercicio 2", 9.0));
-    }
-     */
 
     public List<Mark> getMarks() {
         List<Mark> marks = new ArrayList<Mark>();
