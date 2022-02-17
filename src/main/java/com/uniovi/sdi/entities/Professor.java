@@ -1,7 +1,14 @@
 package com.uniovi.sdi.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity //ejercicio complementario 2
 public class Professor {
 
+    @Id //ejercicio complementario 2
+    @GeneratedValue
     private Long id;
     private String dni;
     private String nombre;

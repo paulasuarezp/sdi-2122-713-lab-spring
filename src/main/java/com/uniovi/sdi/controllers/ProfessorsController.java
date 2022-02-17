@@ -18,9 +18,9 @@ public class ProfessorsController {
         return professorsService.getProfessors().toString();
     }
     @RequestMapping(value = "/professor/add", method = RequestMethod.POST)
-    public String addProfessor(@ModelAttribute Professor professor) {
-        professorsService.addProfessor(professor);
-        return "Adding Professor --> " + professor.toString();
+    public String addProfessor(@ModelAttribute Professor teacher) {
+        professorsService.addProfessor(teacher);
+        return "Adding Teacher";
     }
     @RequestMapping("/professor/details/{id}")
     public String getDetail(@PathVariable Long id) {
