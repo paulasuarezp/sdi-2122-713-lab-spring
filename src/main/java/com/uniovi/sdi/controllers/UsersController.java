@@ -59,9 +59,14 @@ public class UsersController {
     }
     @RequestMapping(value = "/user/edit/{id}", method = RequestMethod.POST)
     public String setEdit(Model model, @PathVariable Long id, @ModelAttribute User user) {
-        usersService.addUser(user);
+        User base = usersService.getUser(id);
+        base.setDni(user.getDni());
+        base.setLastName(user.getLastName());
+        base.setName(user.getName());
+        usersService.updateUser(base); // ejercicio complementario 1 sesion 3
         return "redirect:/user/details/" + id;
     }
+
 
     @RequestMapping(value = "/signup", method = {RequestMethod.POST})
     public String signup(@Validated User user, BindingResult result) {
