@@ -3,6 +3,7 @@ package com.uniovi.sdi.entities;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "mark")
 public class Mark {
     @Id
     @GeneratedValue
