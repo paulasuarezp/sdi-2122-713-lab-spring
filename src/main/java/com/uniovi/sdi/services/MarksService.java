@@ -3,6 +3,8 @@ package com.uniovi.sdi.services;
 import com.uniovi.sdi.entities.Mark;
 import com.uniovi.sdi.repositories.MarksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -28,9 +30,10 @@ public class MarksService {
         marksRepository.findAll().forEach(marks::add);
         return marks;
     }
-    public Mark getMark(Long id){
+
+    public Mark getMark(Long id) {
         Set<Mark> consultedList = (Set<Mark>) httpSession.getAttribute("consultedList");
-        if ( consultedList == null ) {
+        if (consultedList == null) {
             consultedList = new HashSet<Mark>();
         }
         Mark obtainedMark = marksRepository.findById(id).get();
@@ -43,7 +46,16 @@ public class MarksService {
         // Si en Id es null le asignamos el último + 1 de la lista
         marksRepository.save(mark);
     }
+
     public void deleteMark(Long id) {
         marksRepository.deleteById(id);
+    }
+
+    public void setMarkResend(boolean revised, Long id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String dni = auth.getName();
+        Mark mark = marksRepository.findById(id).get();
+        if(mark.getUser().getDni().equals(dni) )
+            marksRepository.updateResend(revised, id);
     }
 }
