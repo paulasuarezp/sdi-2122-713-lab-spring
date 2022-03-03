@@ -1,5 +1,6 @@
 package com.uniovi.sdi;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +17,12 @@ import java.util.Locale;
 
 @Configuration
 public class CustomConfiguration implements WebMvcConfigurer {
+    @Value("${spring.data.web.pageable.page-parameter}")
+    private int page;
+
+    @Value("${spring.data.web.pageable.size-parameter}")
+    private int size;
+
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver localeResolver = new SessionLocaleResolver();
@@ -36,10 +43,12 @@ public class CustomConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        int page = 0;
-        int size = 5;
+        //int page = 0; antes de añadir las variables a application.properties
+        //int size = 5;
         PageableHandlerMethodArgumentResolver resolver = new PageableHandlerMethodArgumentResolver();
         resolver.setFallbackPageable(PageRequest.of(page, size));
         argumentResolvers.add(resolver);
     }
+
+
 }

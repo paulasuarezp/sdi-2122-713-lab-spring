@@ -53,7 +53,7 @@ public class ProfessorsController {
         p.setNombre(professor.getNombre());
         p.setApellidos(professor.getApellidos());
         p.setCategoria(professor.getCategoria());
-        professorsService.addProfessor(professor);
+        professorsService.addProfessor(p);
         return "redirect:/professor/details/"+id;
     }
 
