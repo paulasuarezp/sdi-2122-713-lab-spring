@@ -30,13 +30,11 @@
                         <a class="dropdown-item" href="/user/list">Ver usuarios</a>
                     </div>
                 </li>
-                <li sec:authorize="hasRole('ROLE_ADMIN')" id= "professor-menu" class="nav-item dropdown">
+                <li id= "professor-menu" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="profesorDropdown" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false"> Gestión de profesores
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/professor/add">Añadir profesor</a>
-                        <a class="dropdown-item" href="/professor/delete">Borrar profesor</a>
                         <a class="dropdown-item" href="/professor/list">Ver profesores</a>
                     </div>
                 </li>

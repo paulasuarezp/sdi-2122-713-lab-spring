@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
-import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Set;
 
 @Controller
 public class MarksController {
@@ -39,18 +37,16 @@ public class MarksController {
 
 
     @RequestMapping("/mark/list")
-    public String getList(Pageable pageable, Model model, Principal principal,
-                          @RequestParam(value="", required = false) String searchText){
+    public String getList(Model model, Pageable pageable, Principal principal,
+                          @RequestParam(value = "", required = false) String searchText) {
         String dni = principal.getName(); // DNI es el name de la autenticación
         User user = usersService.getUserByDni(dni);
         Page<Mark> marks = new PageImpl<Mark>(new LinkedList<Mark>());
-        if(searchText != null && !searchText.isEmpty()){
-            marks = marksService.searchMarksByDescriptionAndNameForUser(pageable, searchText,user);
+        if (searchText != null && !searchText.isEmpty()) {
+            marks = marksService.searchMarksByDescriptionAndNameForUser(pageable, searchText, user);
+        } else {
+            marks = marksService.getMarksForUser(pageable, user);
         }
-        else{
-            marks =  marksService.getMarksForUser(pageable, user);
-        }
-
         model.addAttribute("markList", marks.getContent());
         model.addAttribute("page", marks);
         return "mark/list";

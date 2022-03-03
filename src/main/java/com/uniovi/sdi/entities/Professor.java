@@ -18,11 +18,11 @@ public class Professor {
     public Professor(){
 
     }
-    public Professor(long id, String dni, String nombre, String apellido, String categoria) {
-        this.id = id;
+    public Professor(String dni, String nombre, String apellidos, String categoria) {
+       // this.id = id;
         this.dni = dni;
         this.nombre = nombre;
-        this.apellidos = apellido;
+        this.apellidos = apellidos;
         this.categoria = categoria;
     }
 
